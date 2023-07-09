@@ -1,0 +1,57 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """The id of the user"""
+  id: ID!
+
+  """Email of the user"""
+  email: String!
+
+  """Full name of the user"""
+  fullName: String!
+
+  """Phone number of the user"""
+  phone: String!
+
+  """Status of the user"""
+  status: UserStatus!
+
+  """User's roles"""
+  roles: [ValidRoles!]!
+}
+
+enum UserStatus {
+  Active
+  Pending
+  Blocked
+  Incomplete
+}
+
+enum ValidRoles {
+  admin
+  user
+}
+
+type Query {
+  users(
+    offset: Int = 0
+    limit: Int = 10
+
+    """Search term"""
+    search: String
+  ): [User!]!
+  getUser(id: ID!): User!
+}
+
+type Mutation {
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+input UpdateUserInput {
+  email: String
+  fullName: String
+  phone: String
+  id: ID!
+}
